@@ -1,10 +1,13 @@
 @baseUrl = http://localhost:3000
 @contentType = application/json
 
-###
+### Create Product
 POST {{baseUrl}}/products HTTP/1.1
 content-type: application/json
 
 {
   "name": "Jadilson"
 }
+
+### List All Products
+GET {{baseUrl}}/products HTTP/1.1
