@@ -6,7 +6,9 @@ import { CreateProductDto } from 'src/dto/create-product.dto';
 
 @Injectable()
 export class ProductService {
-  constructor(@InjectModel('Product') private readonly _productModel: Model<Product>) {}
+  constructor(
+    @InjectModel('Product') private readonly _productModel: Model<Product>
+  ) {}
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
     const createdProduct = new this._productModel(createProductDto);
@@ -18,14 +20,21 @@ export class ProductService {
   }
 
   async findOne(id: string): Promise<Product> {
-    return this._productModel.findById({_id: id})
+    return this._productModel.findById({ _id: id });
   }
 
   async delete(id: string) {
-    const result = await this._productModel.deleteOne({_id: id}).exec();
+    const result = await this._productModel.deleteOne({ _id: id }).exec();
     if (result.n === 0) {
       throw new NotFoundException('Could not find product.');
     }
-    return result
+  }
+
+  async update(product: CreateProductDto, id: string) {
+    return this._productModel.findOneAndUpdate({ _id: id }, product, {
+      new: true,
+      upsert: false,
+      runValidators: true
+    });
   }
 }
