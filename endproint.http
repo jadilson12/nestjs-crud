@@ -13,4 +13,7 @@ content-type: application/json
 GET {{baseUrl}}/products HTTP/1.1
 
 ### FindOne
-GET {{baseUrl}}/products/5e6c16450671e4393cac4024 HTTP/1.1
+GET {{baseUrl}}/products/5e6c20485c5fa6437e14739 HTTP/1.1
+
+### Delete one product
+DELETE {{baseUrl}}/products/5e6c20485c5fa6437e147392 HTTP/1.1
