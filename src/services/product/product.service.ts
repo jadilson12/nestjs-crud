@@ -16,4 +16,8 @@ export class ProductService {
   async findAll(): Promise<Product[]> {
     return this._productModel.find().exec();
   }
+
+  async findOne(id: string): Promise<Product> {
+    return this._productModel.findById({_id: id})
+  }
 }

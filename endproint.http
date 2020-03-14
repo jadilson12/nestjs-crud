@@ -11,3 +11,6 @@ content-type: application/json
 
 ### List All Products
 GET {{baseUrl}}/products HTTP/1.1
+
+### FindOne
+GET {{baseUrl}}/products/5e6c16450671e4393cac4024 HTTP/1.1
