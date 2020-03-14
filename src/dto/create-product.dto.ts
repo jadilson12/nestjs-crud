@@ -1,4 +1,4 @@
 export class CreateProductDto {
   readonly name: string;
-  readonly id: string;
+  readonly _id: string;
 }

@@ -6,22 +6,23 @@ POST {{baseUrl}}/products HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Jadilson"
+  "name": "rice"
 }
 
 ### List All Products
 GET {{baseUrl}}/products HTTP/1.1
 
 ### FindOne
-GET {{baseUrl}}/products/5e6c212d5c5fa6437e147393 HTTP/1.1
-
-### Delete one product
-DELETE {{baseUrl}}/products/5e6c20485c5fa6437e147392 HTTP/1.1
+GET {{baseUrl}}/products/5e6cbb4d5b2f8e0aa486d8e4 HTTP/1.1
 
 ### UPDATE 
-PUT  {{baseUrl}}/products/5e6c212d5c5fa6437e147393 HTTP/1.1
+PUT  {{baseUrl}}/products/5e6cbb4d5b2f8e0aa486d8e4 HTTP/1.1
 content-type: application/json
 
   {
-    "name": "Guedes"
+    "_id": "5e6cbb4d5b2f8e0aa486d8e4",
+    "name": "rice black"
   }
+
+### Delete one product
+DELETE {{baseUrl}}/products/5e6cbb4d5b2f8e0aa486d8e4 HTTP/1.1
