@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
 import { ProductModule } from './modules/product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from './entitys/product.entity';
+import { ProductEntity } from 'entities/product.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mongodb',
+      type: 'postgres',
       host: 'localhost',
+      username: 'postgres',
+      password: 'nestjs',
       database: 'test',
-      entities: [Product],
+      entities: [ProductEntity],
       synchronize: true
     }),
     ProductModule

@@ -1,31 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from 'entitys/product.entity';
+import { ProductEntity } from 'entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ProductModel } from 'models/product.model';
+import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class ProductService {
   constructor(
-    @InjectRepository(Product)
-    private readonly _productRepository: Repository<Product>
+    @InjectRepository(ProductEntity)
+    private readonly _repository: Repository<ProductEntity>
   ) {}
+
+  /**
+   * @description seacrh with paginate product
+   * @param options  IPaginationOptions
+   * @returns {Promise} Promise<Pagination<ProductEntity>>
+   */
+  async search(options: IPaginationOptions): Promise<Pagination<ProductEntity>> {
+    // const queryBuilder = this._repository.createQueryBuilder('p');
+    // queryBuilder.where('p.id = :id', { id: 1 });
+    // return await paginate<ProductEntity>(queryBuilder, options);
+    return await paginate<ProductEntity>(this._repository, options);
+  }
 
   /**
    * @description create new product
    * @param product  product
    * @returns {Promise} promise
    */
-  create(productModel: ProductModel): Promise<Product> {
-    return this._productRepository.save(productModel);
-  }
-
-  /**
-   * @description List all product
-   * @returns {Promise} promise
-   */
-  async findAll(): Promise<Product[]> {
-    return await this._productRepository.find();
+  create(productModel: ProductModel): Promise<ProductEntity> {
+    return this._repository.save(productModel);
   }
 
   /**
@@ -33,8 +38,8 @@ export class ProductService {
    * @param id string
    * @returns {Promise} promise
    */
-  async findOne(id: string): Promise<Product> {
-    return await this._productRepository.findOne(id);
+  async findOne(id: string): Promise<ProductEntity> {
+    return await this._repository.findOne(id);
   }
 
   /**
@@ -42,7 +47,7 @@ export class ProductService {
    * @param id string
    */
   async delete(id: string) {
-    return await this._productRepository.delete(id);
+    return await this._repository.delete(id);
   }
 
   /**
@@ -51,8 +56,8 @@ export class ProductService {
    * @param object object product
    */
   async update(product: ProductModel, id: string) {
-    const productUpdate = await this._productRepository.findOne(id);
+    const productUpdate = await this._repository.findOne(id);
     productUpdate.name = product.name;
-    return await this._productRepository.save(productUpdate);
+    return await this._repository.save(productUpdate);
   }
 }

@@ -9,14 +9,14 @@ content-type: application/json
   "name": "rice"
 }
 
-### List All Products
+### search Products
 GET {{baseUrl}}/products HTTP/1.1
 
 ### FindOne
-GET {{baseUrl}}/products/5e6e13293594ca1e17f4c3da HTTP/1.1
+GET {{baseUrl}}/products/1 HTTP/1.1
 
 ### UPDATE 
-PUT  {{baseUrl}}/products/5e6e13293594ca1e17f4c3da HTTP/1.1
+PUT  {{baseUrl}}/products/1 HTTP/1.1
 content-type: application/json
 
   {
@@ -25,4 +25,4 @@ content-type: application/json
 }
 
 ### Delete one product
-DELETE {{baseUrl}}/products/5e6e13293594ca1e17f4c3da HTTP/1.1
+DELETE {{baseUrl}}/products/1 HTTP/1.1
