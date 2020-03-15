@@ -13,16 +13,16 @@ content-type: application/json
 GET {{baseUrl}}/products HTTP/1.1
 
 ### FindOne
-GET {{baseUrl}}/products/5e6cbb4d5b2f8e0aa486d8e4 HTTP/1.1
+GET {{baseUrl}}/products/5e6e13293594ca1e17f4c3da HTTP/1.1
 
 ### UPDATE 
-PUT  {{baseUrl}}/products/5e6cbb4d5b2f8e0aa486d8e4 HTTP/1.1
+PUT  {{baseUrl}}/products/5e6e13293594ca1e17f4c3da HTTP/1.1
 content-type: application/json
 
   {
-    "_id": "5e6cbb4d5b2f8e0aa486d8e4",
-    "name": "rice black"
-  }
+  "id": "5e6e11f46864361d7f46d349",
+  "name": "rice new"
+}
 
 ### Delete one product
-DELETE {{baseUrl}}/products/5e6cbb4d5b2f8e0aa486d8e4 HTTP/1.1
+DELETE {{baseUrl}}/products/5e6e13293594ca1e17f4c3da HTTP/1.1

@@ -1,0 +1,8 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  },
+  "editor.formatOnSave": true,
+  "prettier.printWidth": 120,
+  "editor.minimap.enabled": false
+}

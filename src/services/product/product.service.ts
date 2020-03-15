@@ -1,23 +1,23 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Product } from 'src/interfaces/product.interface';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { CreateProductDto } from 'src/dto/create-product.dto';
+import { Injectable } from '@nestjs/common';
+import { Product } from 'entitys/product.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { ProductModel } from 'models/product.model';
 
 @Injectable()
 export class ProductService {
   constructor(
-    @InjectModel('Product') private readonly _productModel: Model<Product>
+    @InjectRepository(Product)
+    private readonly _productRepository: Repository<Product>
   ) {}
 
   /**
    * @description create new product
-   * @param createProductDto  createProducDto
+   * @param product  product
    * @returns {Promise} promise
    */
-  async create(createProductDto: CreateProductDto): Promise<Product> {
-    const createdProduct = new this._productModel(createProductDto);
-    return createdProduct.save();
+  create(productModel: ProductModel): Promise<Product> {
+    return this._productRepository.save(productModel);
   }
 
   /**
@@ -25,7 +25,7 @@ export class ProductService {
    * @returns {Promise} promise
    */
   async findAll(): Promise<Product[]> {
-    return this._productModel.find().exec();
+    return await this._productRepository.find();
   }
 
   /**
@@ -34,17 +34,7 @@ export class ProductService {
    * @returns {Promise} promise
    */
   async findOne(id: string): Promise<Product> {
-    let result: Product | PromiseLike<Product>;
-    try {
-      result = await this._productModel.findById(id).exec();
-      if (!result) {
-        throw new NotFoundException('Could not find product.');
-      }
-    } catch (error) {
-      throw new NotFoundException('Could not find product.');
-    }
-
-    return result;
+    return await this._productRepository.findOne(id);
   }
 
   /**
@@ -52,36 +42,17 @@ export class ProductService {
    * @param id string
    */
   async delete(id: string) {
-    try {
-      const result = await this._productModel.deleteOne({ _id: id }).exec();
-      if (result.n === 0) {
-        throw new NotFoundException('Could not find product.');
-      }
-    } catch (error) {
-      throw new NotFoundException('Could not find product.');
-    }
+    return await this._productRepository.delete(id);
   }
 
   /**
    * @description Delete one product
    * @param id string
-   * @param product createProductDto
+   * @param object object product
    */
-  async update(product: CreateProductDto, id: string) {
-    try {
-      if (product._id != id) {
-        throw new NotFoundException('id invalid');
-      }
-      this._productModel.updateOne({ _id: id }, product, { new: true }).exec();
-
-      const updated = this._productModel.findOne({ _id: id });
-      if (!updated) {
-        throw new NotFoundException('Product not found');
-      }
-
-      return updated;
-    } catch (err) {
-      return err.response;
-    }
+  async update(product: ProductModel, id: string) {
+    const productUpdate = await this._productRepository.findOne(id);
+    productUpdate.name = product.name;
+    return await this._productRepository.save(productUpdate);
   }
 }
