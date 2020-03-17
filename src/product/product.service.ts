@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { ProductEntity } from 'entities/product.entity';
+import { Product as ProductEntity } from './product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ProductModel } from 'models/product.model';
+import { ProductModel } from './product.model';
 import { paginate, Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
 
 @Injectable()

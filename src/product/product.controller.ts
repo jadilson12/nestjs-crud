@@ -1,13 +1,13 @@
 import { Controller, Post, Body, Get, Param, Delete, Put, Query } from '@nestjs/common';
-import { ProductService } from 'services/product/product.service';
-import { ProductModel } from 'models/product.model';
-import { ProductEntity } from 'entities/product.entity';
+import { ProductService } from './product.service';
+import { ProductModel } from './product.model';
+import { Product as ProductEntity } from './product.entity';
 @Controller('products')
 export class ProductController {
   constructor(private readonly _service: ProductService) {}
 
-  @Get('')
-  async index(@Query('page') page = 0, @Query('limit') limit = 10) {
+  @Get()
+  async search(@Query('page') page = 0, @Query('limit') limit = 10) {
     limit = limit > 100 ? 100 : limit;
     return await this._service.search({ page, limit, route: 'http://localhost:3000/products' });
   }
