@@ -17,7 +17,7 @@ export class ProductService {
    * @param options  IPaginationOptions
    * @returns {Promise} Promise<Pagination<ProductEntity>>
    */
-  async search(options: IPaginationOptions): Promise<Pagination<ProductEntity>> {
+  async findAll(options: IPaginationOptions): Promise<Pagination<ProductEntity>> {
     // const queryBuilder = this._repository.createQueryBuilder('p');
     // queryBuilder.where('p.id = :id', { id: 1 });
     // return await paginate<ProductEntity>(queryBuilder, options);
