@@ -26,3 +26,18 @@ content-type: application/json
 
 ### Delete one product
 DELETE {{baseUrl}}/products/1 HTTP/1.1
+
+
+### Login
+POST {{baseUrl}}/auth/login HTTP/1.1
+content-type: application/json
+
+{
+  "username": "john",
+  "password": "changeme"
+}
+
+### profile
+GET {{baseUrl}}/auth/profile HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJzdWIiOjEsImlhdCI6MTU4NDQwOTY4NCwiZXhwIjoxNTg0NDA5NzQ0fQ.VKRrd5YzuFBHMPEjt1I0xV0NZ4lyot68jODuvrQF1AA
+
